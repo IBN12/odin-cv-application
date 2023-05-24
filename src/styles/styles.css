@@ -1,0 +1,32 @@
+/* app-component-container - The app root component container. */
+.app-component-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 8px;
+
+    border: 1px solid red;
+    padding: 10px;
+}
+.app-component-container > div{
+    border: 1px solid green;
+    text-align: center;
+}
+
+/* general-information-container - The general information component container. */
+.general-information-container{
+
+}
+
+/* educational-experience-container - The educationcal experience component container. */
+.educational-experience-container{
+
+}
+
+/* display-information-container - The display information component container. */
+.display-information-container{
+   
+}
+.display-information-container > div >div{
+    border: 2px solid orange;
+}
