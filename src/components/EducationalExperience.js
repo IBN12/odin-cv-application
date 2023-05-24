@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { SubmitButton } from "./SumbitButton";
 import uniqid from "uniqid";
+import { compareAsc } from "date-fns";
 
 // EducationalExperience Class: The educational experience class component.
 export class EducationalExperience extends Component{
@@ -34,8 +35,23 @@ export class EducationalExperience extends Component{
                 e.preventDefault();
                 console.log("School Name: ", schoolName); // Testing
                 console.log("Main Study: ", mainStudy); // Testing
+                console.log("\n"); // Testing
+
                 console.log("Start Date: ", startDate); // Testing
+                const copyStartDate = new Date(startDate); 
+                console.log('Copy Start Date: ', copyStartDate); // Testing
+                console.log('Year: ', copyStartDate.getFullYear()); // Testing
+                console.log('Month: ', copyStartDate.getMonth() + 1); // Testing
+                console.log('Date: ', copyStartDate.getDate() + 1); // Testing
+                console.log("\n"); // Testing
+
                 console.log("End Date: ", endDate); // Testing
+                const copyEndDate = new Date(endDate); 
+                console.log('Copy End Date: ', copyEndDate); // Testing
+                console.log('Year: ', copyEndDate.getFullYear()); // Testing
+                console.log("Month: ", copyEndDate.getMonth() + 1); // Testing
+                console.log("Date: ", copyEndDate.getDate() + 1); // Testing
+                console.log("\n"); // Testing
                 
                 if (this.presentDate)
                 {
@@ -46,6 +62,7 @@ export class EducationalExperience extends Component{
                 {
                     handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: endDate, isEduInfo: true, id: uniqid()});
                 }
+                
             }}>
 
                 <div>

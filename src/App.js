@@ -62,9 +62,31 @@ export default class App extends Component{
     }
 
     handleInfo(props){
-        this.setState({
-            list: this.state.list.concat(props),
-        });
+        if (props.schoolName)
+        {
+            this.setState({
+                list: this.state.list.concat(props),
+                schoolName: "",
+                mainStudy: "",
+                startDate: "",
+                endDate: "",
+            });
+        }
+        else if (props.companyName)
+        {
+            this.setState({
+                list: this.state.list.concat(props),
+                companyName: "",
+                positionTitle: "",
+                mainTask: "",
+                wStartDate: "",
+                wEndDate: "",
+            });
+        }
+
+        // this.setState({
+        //     list: this.state.list.concat(props),
+        // });
 
         if (props.isEduInfo)
         {
@@ -161,6 +183,10 @@ export default class App extends Component{
     render(){
         return(
             <div className="app-component-container">
+                <div>
+                    <h1>Curriculumn Vitae</h1>
+                </div>
+                
                 <div>
                     <button onClick={this.undisplayInfo} disabled={!this.state.display}>Fill CV</button>
                     <button onClick={this.displayInfo} disabled={this.state.display}>View Display</button>
