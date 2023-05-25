@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { SubmitButton } from "./SumbitButton";
 import uniqid from "uniqid";
-import { compareAsc } from "date-fns";
+import { compareAsc, parse } from "date-fns";
 
 // EducationalExperience Class: The educational experience class component.
 export class EducationalExperience extends Component{
@@ -38,29 +38,77 @@ export class EducationalExperience extends Component{
                 console.log("\n"); // Testing
 
                 console.log("Start Date: ", startDate); // Testing
-                const copyStartDate = new Date(startDate); 
-                console.log('Copy Start Date: ', copyStartDate); // Testing
-                console.log('Year: ', copyStartDate.getFullYear()); // Testing
-                console.log('Month: ', copyStartDate.getMonth() + 1); // Testing
-                console.log('Date: ', copyStartDate.getDate() + 1); // Testing
+                const startDateParsed = parse(startDate, 'yyyy-MM-dd', new Date());
+                console.log('Start Date Parsed: ', startDateParsed); // Testing
+                console.log('Year: ', startDateParsed.getFullYear()); // Testing
+                console.log('Month: ', startDateParsed.getMonth() + 1); // Testing
+                console.log('Date: ', startDateParsed.getDate()); // Testing
                 console.log("\n"); // Testing
 
                 console.log("End Date: ", endDate); // Testing
-                const copyEndDate = new Date(endDate); 
-                console.log('Copy End Date: ', copyEndDate); // Testing
-                console.log('Year: ', copyEndDate.getFullYear()); // Testing
-                console.log("Month: ", copyEndDate.getMonth() + 1); // Testing
-                console.log("Date: ", copyEndDate.getDate() + 1); // Testing
+                const endDateParsed = parse(endDate, 'yyyy-MM-dd', new Date());
+                console.log('End Date Parsed: ', endDateParsed); // Testing
+                console.log('Year: ', endDateParsed.getFullYear()); // Testing
+                console.log('Month: ', endDateParsed.getMonth() + 1); // Testing
+                console.log('Date: ', endDateParsed.getDate()); // Testing
                 console.log("\n"); // Testing
+
+                const dateComparisonResult = compareAsc(
+                    new Date(startDateParsed.getFullYear(), startDateParsed.getMonth() + 1, startDateParsed.getDate()),
+                    new Date(endDateParsed.getFullYear(), endDateParsed.getMonth() + 1, endDateParsed.getDate())
+                )
+                console.log("Date Comparison Result: ", dateComparisonResult); // Testing
+                console.log("\n"); // Testing
+
+                const numericalPresentDate = new Date();
+                console.log('Numerical Present Date: ', numericalPresentDate); // Testing
+                console.log('Year: ', numericalPresentDate.getFullYear()); // Testing
+                console.log('Month: ', numericalPresentDate.getMonth() + 1); // Testing
+                console.log('Date: ', numericalPresentDate.getDate()); // Testing
+                console.log("\n"); // Testing 
                 
                 if (this.presentDate)
                 {
-                    handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: "Present", isEduInfo: true, id: uniqid()});
-                    this.presentDate = false;
+                    // Compare the user start date with the present date.
+                    const presentDateComparisonResult = compareAsc(
+                        new Date(startDateParsed.getFullYear(), startDateParsed.getMonth() + 1, startDateParsed.getDate()),
+                        new Date(numericalPresentDate.getFullYear(), numericalPresentDate.getMonth() + 1, numericalPresentDate.getDate())
+                    );
+                    console.log("Present Date Comparison Result: ", presentDateComparisonResult); // Testing
+
+                    if (presentDateComparisonResult === 1)
+                    {
+                        console.log("Invalid Date Input: The start date comes after the present date."); // Testing
+                        alert("Invalid Date Input: The start date should come before the present date.");
+                        return;
+                    }
+                    else if (presentDateComparisonResult === -1)
+                    {
+                        handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: "Present", isEduInfo: true, id: uniqid()});
+                        this.presentDate = false;
+                    }
+                    else if (presentDateComparisonResult === 0)
+                    {
+                        handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: "Present", isEduInfo: true, id: uniqid()});
+                        this.presentDate = false;
+                    }
                 }
                 else
                 {
-                    handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: endDate, isEduInfo: true, id: uniqid()});
+                    if (dateComparisonResult === 1)
+                    {
+                        console.log("Invalid Date Input: The start date comes after the end date."); // Testing
+                        alert("Invalid Date Input: The start date should come before the end date.");
+                        return;
+                    }
+                    else if (dateComparisonResult === -1)
+                    {
+                        handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: endDate, isEduInfo: true, id: uniqid()});
+                    }
+                    else if (dateComparisonResult === 0)
+                    {
+                        handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: endDate, isEduInfo: true, id: uniqid()});
+                    }
                 }
                 
             }}>

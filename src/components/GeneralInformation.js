@@ -36,7 +36,11 @@ export class GeneralInformation extends Component{
 
                     <div>
                         <label htmlFor="phoneNumber">Phone Number</label>
-                        <input onChange={e => handleChange(e)} type="tel" name="phoneNumber" id="phoneNumber" value={phoneNumber}  />
+                        <input onChange={e => handleChange(e)} type="tel" name="phoneNumber" id="phoneNumber" pattern="([0-9]{3}|\([0-9]{3}\))-[0-9]{3}-[0-9]{4}"  value={phoneNumber}  />
+                        <p style={{
+                            margin: "0px",
+                            fontSize: "13px",
+                        }}>Phone number entry requirement: (###)-###-#### or ###-###-####</p>
                     </div>
 
                     <div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { SubmitButton } from "./SumbitButton";
 import uniqid from "uniqid";
+import {compareAsc, parse} from "date-fns";
 
 // PracticalExperience Class:
 export class PracticalExperience extends Component{
@@ -35,17 +36,78 @@ export class PracticalExperience extends Component{
                     console.log("Company Name: ", companyName); // Testing
                     console.log("Position Title: ", positionTitle); // Testing 
                     console.log("Main Task: ", mainTask); // Testing
+                    console.log("\n"); // Testing
+
                     console.log("Work Start Date: ", wStartDate); // Testing
+                    const wStartDateParse = parse(wStartDate, 'yyyy-MM-dd', new Date());
+                    console.log("Work Start Date Parsed: ", wStartDateParse); // Testing
+                    console.log("Year: ", wStartDateParse.getFullYear()); // Testing
+                    console.log("Month: ", wStartDateParse.getMonth() + 1); // Testing
+                    console.log("Date: ", wStartDateParse.getDate()); // Testing
+                    console.log("\n"); // Testing
+
                     console.log("Work End Date: ", wEndDate); // Testing
+                    const wEndDateParse = parse(wEndDate, 'yyyy-MM-dd', new Date());
+                    console.log("Work End Date Parsed: ", wEndDateParse); // Testing
+                    console.log("Year: ", wEndDateParse.getFullYear()); // Testing
+                    console.log("Month: ", wEndDateParse.getMonth() + 1); // Testing
+                    console.log("Date: ", wEndDateParse.getDate());
+
+                    const dateComparisonResult = compareAsc(
+                        new Date(wStartDateParse.getFullYear(), wStartDateParse.getMonth() + 1, wStartDateParse.getDate()),
+                        new Date(wEndDateParse.getFullYear(), wEndDateParse.getMonth() + 1, wEndDateParse.getDate())
+                    );
+                    console.log("Date Comparison Result: ", dateComparisonResult); // Testing
+                    console.log("\n"); // Testing
+
+                    const numericalPresentDate = new Date();
+                    console.log("Numerical Present Date: ", numericalPresentDate); // Testing
+                    console.log("Year: ", numericalPresentDate.getFullYear()); // Testing
+                    console.log("Month: ", numericalPresentDate.getMonth() + 1); // Testing 
+                    console.log("Date: ", numericalPresentDate.getDate()); // Testing
 
                     if (this.presentDate)
                     {
-                        handleInfo({companyName: companyName, positionTitle: positionTitle, mainTask: mainTask, wStartDate: wStartDate, wEndDate: "Present", isWorkInfo: true, id: uniqid()});
-                        this.presentDate = false; 
+                        // Compare the user start date with the present date.
+                        const presentDateComparisonResult = compareAsc(
+                            new Date(wStartDateParse.getFullYear(), wStartDateParse.getMonth() + 1, wStartDateParse.getDate()),
+                            new Date(numericalPresentDate.getFullYear(), numericalPresentDate.getMonth() + 1, numericalPresentDate.getDate())
+                        );
+                        console.log("Present Date Comparison Result: ", presentDateComparisonResult); // Testing
+
+                        if (presentDateComparisonResult === 1)
+                        {
+                            console.log("Invalid Date Input: The start date should come before the present date."); // Testing
+                            alert("Invalid Date Input: The start date should come before the present date.");
+                            return;
+                        }
+                        else if (presentDateComparisonResult === -1)
+                        {
+                            handleInfo({companyName: companyName, positionTitle: positionTitle, mainTask: mainTask, wStartDate: wStartDate, wEndDate: "Present", isWorkInfo: true, id: uniqid()});
+                            this.presentDate = false; 
+                        }
+                        else if (presentDateComparisonResult === 0)
+                        {
+                            handleInfo({companyName: companyName, positionTitle: positionTitle, mainTask: mainTask, wStartDate: wStartDate, wEndDate: "Present", isWorkInfo: true, id: uniqid()});
+                            this.presentDate = false; 
+                        }
                     }
                     else
                     {
-                        handleInfo({companyName: companyName, positionTitle: positionTitle, mainTask: mainTask, wStartDate: wStartDate, wEndDate: wEndDate, isWorkInfo: true, id: uniqid()})
+                        if (dateComparisonResult === 1)
+                        {
+                            console.log("Invalid Date Input: The start date should come before the end date."); // Testing
+                            alert("Invalid Date Input: The start date should come before the end date."); // Testing
+                            return;
+                        }
+                        else if (dateComparisonResult === -1)
+                        {
+                            handleInfo({companyName: companyName, positionTitle: positionTitle, mainTask: mainTask, wStartDate: wStartDate, wEndDate: wEndDate, isWorkInfo: true, id: uniqid()});
+                        }
+                        else if (dateComparisonResult === 0)
+                        {
+                            handleInfo({companyName: companyName, positionTitle: positionTitle, mainTask: mainTask, wStartDate: wStartDate, wEndDate: wEndDate, isWorkInfo: true, id: uniqid()});
+                        }
                     }
                 }}>
                     <div>
