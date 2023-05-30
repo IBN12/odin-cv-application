@@ -1,3 +1,24 @@
+/* body - The main body of the application. */
+body{
+    background:linear-gradient(to left, #2b5876, #4e4376);
+}
+
+/* * - All elements in the application. */
+*{
+    box-sizing: border-box;
+}
+/********************************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************/
+/* |fonts| */
+/* font 0 - rockinline font */
+@font-face {
+    font-family: rockinline;
+    src: url(../fonts/rockinline/Rockinline.ttf);
+}
+
+/********************************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************/
+/* |App Component Container| */
 /* app-component-container - The app root component container. */
 .app-component-container{
     display: grid;
@@ -7,26 +28,343 @@
 
     border: 1px solid red;
     padding: 10px;
+    font-family: rockinline ,system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: white;
 }
 .app-component-container > div{
     border: 1px solid green;
     text-align: center;
+    padding: 10px;
+}
+.app-component-container > div:nth-child(1) > h1{
+    font-size: 45px;
+    letter-spacing: 4px;
+}
+.app-component-container > div:nth-child(2) > button{
+    padding: 5px 15px 5px 15px;
+    font-family: rockinline ,system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 18px;
+    color: white;
+    background-color: #0891b2;
+    border: 1px solid #0891b2;
+    border-radius: 10px;
+    margin: 3px;
+}
+.app-component-container > div:nth-child(2) > button:hover{
+    background-color: #0890b269;
+    border: 1px solid #0890b269;
+    cursor: pointer;
+}
+.app-component-container > div:nth-child(2) > button:focus{
+    border: 1px solid white;
+    outline: none;
 }
 
+/* Current Viewport */
+#current-viewport{
+    background-color: #f87171;
+    border: 1px solid #f87171;
+}
+#current-viewport:hover{
+    background-color: #f8717177;
+    border: 1px solid #f8717177;
+}
+
+/********************************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************/
+/* |General Information Component Container| */
 /* general-information-container - The general information component container. */
-.general-information-container{
-
+.general-information-container > h2{
+    font-size: 30px;
+    letter-spacing: 4px;
+}
+.general-information-container > form > div{
+    padding: 10px;
+    font-size: 18px;
+}
+.general-information-container > form > div > input{
+    background-color: inherit;
+    border: 1px solid #64748b;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    color: #9ca3af;
+    font-size: 16px;
+}
+.general-information-container > form > div > label{
+    margin-right: 20px;
+}
+.general-information-container > form > div > input:focus{
+    outline: none;
+    border-bottom-color: white;
+}
+#name{ /* Name Input*/
+    width: 400px;
+}
+#email{ /* Email Input */
+    width: 400px;
+}
+#phoneNumber{ /* Phone Number Input */
+    width: 400px;
 }
 
+/********************************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************/
+/* |Educational Experience Component Container| */
 /* educational-experience-container - The educationcal experience component container. */
-.educational-experience-container{
-
+.educational-experience-container > h2{
+    font-size: 30px;
+    letter-spacing: 4px;
+}
+.educational-experience-container > form > div{
+    padding: 10px;
+    font-size: 18px;
+}
+.educational-experience-container > form > div > input{
+    background-color: inherit;
+    border: 1px solid #64748b;
+    border-top:none;
+    border-left: none;
+    border-right: none;
+    color: #9ca3af;
+    font-size: 16px;
+}
+.educational-experience-container > form > div > label{
+    margin-right: 20px
+}
+.educational-experience-container > form > div > input:focus{
+    outline: none;
+    border-bottom-color: white;
+}
+#schoolName{ /* School Name Input */
+    width: 400px;
+}
+#mainStudy{ /* Main Study Input */
+    width: 400px;
+}
+#startDate{ /* Start Date Input */
+    width: 150px;
+}
+#endDate{ /* End Date Input */
+    width: 150px;
+}
+.educational-experience-container > form > div:nth-child(4) > span > button{
+    padding: 5px 15px 5px 15px;
+    font-size: 16px;
+    font-family: rockinline, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: white;
+    border-radius: 10px
 }
 
+/* Educational Present Button Clicked - true */
+#present-button-clicked-edu-true{
+    background-color: #f87171;
+    border: 1px solid #f87171;
+    outline: none;
+}
+#present-button-clicked-edu-true:hover{
+    background-color: #f8717177;
+    border: 1px solid #f8717177;
+    cursor: pointer;
+}
+#present-button-clicked-edu-true:focus{
+    outline: none;
+}
+
+/* Educational Present Button Clicked - false*/
+#present-button-clicked-edu-false{
+    background-color: #0891b2;
+    border: 1px solid #0891b2;
+    outline: none;
+}
+#present-button-clicked-edu-false:hover{
+    background-color: #0890b269;
+    border: 1px solid #0890b269;
+    cursor: pointer;
+}
+#present-button-clicked-edu-false:focus{
+    outline: none;
+}
+
+/********************************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************/
+/* |Practical Experience Component Container| */
+/* practical-experience-container - The practical experience component container. */
+.practical-experience-container > h2{
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+.practical-experience-container > form > div{
+    padding: 10px;
+    font-size: 18px;
+}
+.practical-experience-container > form > div > input{
+    background-color: inherit;
+    border: 1px solid #64748b;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    color: #9ca3af;
+    font-size: 16px;
+}
+.practical-experience-container > form > div > label{
+    margin-right: 20px;
+}
+.practical-experience-container > form > div > input:focus{
+    outline: none;
+    border-bottom-color: white;
+}
+#companyName{ /* Company Name Input */
+    width: 400px;
+}
+#positionTitle{ /* Position Title Input */
+    width: 400px;
+}
+#mainTask{ /* Main Task Input */
+    width: 400px;
+}
+#startDate{ /* Start Date Input */
+    width: 150px;
+}
+#endDate{ /* End Date Input */
+    width: 150px;
+}
+.practical-experience-container > form > div:nth-child(5) > span > button{ /* Present Button */
+    padding: 5px 15px 5px 15px;
+    font-size: 16px;
+    font-family: rockinline, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: white;
+    border-radius: 10px;
+}
+
+/* Practical Present Button clicked - true */
+#present-button-clicked-prac-true{
+    background-color: #f87171;
+    border: 1px solid #f87171;
+    outline: none;
+}
+#present-button-clicked-prac-true:hover{
+    background-color: #f8717177;
+    border: 1px solid #f8717177;
+    cursor: pointer;
+}
+#present-button-clicked-prac-true:focus{
+    outline: none;
+}
+
+/* Practical Present Button clicked - false */
+#present-button-clicked-prac-false{
+    background-color: #0891b2;
+    border: 1px solid #0891b2;
+    outline: none;
+}
+#present-button-clicked-prac-false:hover{
+    background-color: #0890b269;
+    border: 1pxs solid #0890b269;
+    cursor: pointer;
+}
+#present-button-clicked-prac-false:focus{
+    outline: none;
+}
+
+/********************************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************/
+/* |Display Information Component Container| */
 /* display-information-container - The display information component container. */
 .display-information-container{
    
 }
 .display-information-container > div >div{
     border: 2px solid orange;
+}
+
+/********************************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************/
+/* |Submit Button Component Container| */
+/* submit-button-component-container > button - The submit button component container. */
+.submit-button-component-container > button{
+    padding: 5px 15px 5px 15px;
+    font-size: 16px;
+    border: 1px solid #164e6352;
+    border-radius: 10px;
+    background-color: #164e6352;
+    color: white;
+    font-family: rockinline, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.submit-button-component-container > button:hover{
+    background-color: #164e63;
+    border: 1px solid #164e63;
+    cursor: pointer;
+}
+.submit-button-component-container > button:focus{
+    outline: none;
+    background-color: #164e63;
+    border: 1px solid #164e63;
+}
+
+/********************************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************/
+/* |Media Section| */
+/* Page will respond to desktop miniaturization, tablet viewports, and mobile viewports. */
+
+/* Media-0 - For desktop miniaturization. */
+@media screen and (max-width: 1000px){
+    /* app-component-container - The app component container. */
+    .app-component-container{
+        grid-template-columns: 100%;
+        width: 100%;
+    }
+
+    /* general-information-container - The general information container. */
+    .general-information-container > h2{ /* Testing */
+        color: red;
+    }
+    .general-information-container > form > div > label{
+        display: block;
+    }
+    #name{ /* Name Input*/
+        width: 100%;
+    }
+    #email{ /* Email Input */
+        width: 100%;
+    }
+    #phoneNumber{ /* Phone Number Input */
+        width: 100%;
+    }
+    
+    /* educational-experience-container - The educational experience container. */
+    .educational-experience-container > h2{ /* Testing */
+        color: red;
+    }
+    .educational-experience-container > form > div > label{
+        display: block;
+    }
+    #schoolName{ /* School Name Input */
+        width: 100%;
+    }
+    #mainStudy{ /* Main Study Input */
+        width: 100%;
+    }
+
+    /* practical-experience-container - The practical experience container. */
+    .practical-experience-container > h2{ /* Testing */
+        color: red;
+    }
+    .practical-experience-container > form > div > label{
+        display: block;
+    }
+    #companyName{ /* Company Name Input */
+        width: 100%;
+    }
+    #positionTitle{ /* Position Title Input */
+        width: 100%;
+    }
+    #mainTask{ /* Main Task Input */
+        width: 100%;
+    }
+}
+
+/* Media-1 - For mobile viewports. */
+@media screen and (max-width: 600px){
+
 }

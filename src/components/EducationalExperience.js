@@ -11,17 +11,29 @@ export class EducationalExperience extends Component{
         this.endDatePresent = this.endDatePresent.bind(this); 
     }
 
+    componentDidMount(){
+        const presentButton = document.querySelector('.educational-experience-container > form > div:nth-child(4) > span > button');
+        presentButton.setAttribute('id', 'present-button-clicked-edu-false');
+    }
+
     endDatePresent(){
         console.log("End Date Present Function For Educational Experience..."); // Testing
         if(this.presentDate === false)
         {
             this.presentDate = true; 
             console.log("Present Date Educational Experience: ", this.presentDate); // Testing
+            const presentButton = document.querySelector('.educational-experience-container > form > div:nth-child(4) > span > button');
+            console.log("The Present Button: ", presentButton); // Testing
+            presentButton.removeAttribute('id');
+            presentButton.setAttribute('id', 'present-button-clicked-edu-true');
         }
         else if(this.presentDate === true)
         {
             this.presentDate = false;
             console.log("Present Date Education Experience: ", this.presentDate); // Testing
+            const presentButton = document.querySelector('.educational-experience-container > form > div:nth-child(4) > span > button');
+            presentButton.removeAttribute('id'); 
+            presentButton.setAttribute('id', 'present-button-clicked-edu-false');
         }
     }
 
@@ -130,7 +142,7 @@ export class EducationalExperience extends Component{
 
                 <div>
                     <label htmlFor="endDate">End Date</label>
-                    <span><input onChange={handleChange} type="date" id="endDate" name="endDate" disabled={this.presentDate} value={endDate} /> <button type="button" onClick={this.endDatePresent}>Present</button></span>
+                    <input onChange={handleChange} type="date" id="endDate" name="endDate" disabled={this.presentDate} value={endDate} /> <span><button type="button" onClick={this.endDatePresent}>Present</button></span>
                 </div>
 
                 <div>

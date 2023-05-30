@@ -57,8 +57,26 @@ export default class App extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.removeInfo = this.removeInfo.bind(this);
         this.saveGeneralInfo = this.saveGeneralInfo.bind(this);
-        this.displayInfo = () => this.setState({display: true}); 
-        this.undisplayInfo = () => this.setState({display: false});
+
+        this.displayInfo = () => { 
+            this.setState({display: true});
+            const displayCVButton = document.querySelector('.app-component-container > div:nth-child(2) > button:nth-child(2)');
+            const fillCVButton = document.querySelector('.app-component-container > div:nth-child(2) > button:nth-child(1)');
+            fillCVButton.removeAttribute('id');
+            displayCVButton.setAttribute('id', 'current-viewport');
+        }
+        this.undisplayInfo = () => {
+            this.setState({display: false});
+            const displayCVButton = document.querySelector('.app-component-container > div:nth-child(2) > button:nth-child(2)');
+            const fillCVButton = document.querySelector('.app-component-container > div:nth-child(2) > button:nth-child(1)');
+            displayCVButton.removeAttribute('id');
+            fillCVButton.setAttribute('id', 'current-viewport');
+        }
+    }
+
+    componentDidMount(){
+        const fillCVButton = document.querySelector('.app-component-container > div:nth-child(2) > button:nth-child(1)');
+        fillCVButton.setAttribute('id', 'current-viewport');
     }
 
     handleInfo(props){

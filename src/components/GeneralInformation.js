@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { SubmitButton } from "./SumbitButton";
+import '../styles/styles.css';
 
 // GeneralInformation Class: The general information class component. 
 export class GeneralInformation extends Component{
@@ -26,7 +27,7 @@ export class GeneralInformation extends Component{
 
                     <div>
                         <label htmlFor="name">Name</label>
-                        <input onChange={e => handleChange(e)} type="text" name="name" id="name" value={name} />
+                        <input  onChange={e => handleChange(e)} type="text" name="name" id="name" value={name} />
                     </div>
 
                     <div>
@@ -38,8 +39,8 @@ export class GeneralInformation extends Component{
                         <label htmlFor="phoneNumber">Phone Number</label>
                         <input onChange={e => handleChange(e)} type="tel" name="phoneNumber" id="phoneNumber" pattern="([0-9]{3}|\([0-9]{3}\))-[0-9]{3}-[0-9]{4}"  value={phoneNumber}  />
                         <p style={{
-                            margin: "0px",
-                            fontSize: "13px",
+                            marginTop: "10px",
+                            fontSize: "16px",
                         }}>Phone number entry requirement: (###)-###-#### or ###-###-####</p>
                     </div>
 

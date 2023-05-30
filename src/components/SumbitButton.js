@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import '../styles/styles.css';
 
 export class SubmitButton extends Component{
     constructor(props){
@@ -10,7 +11,7 @@ export class SubmitButton extends Component{
         const {isGenInfo} = this.props;
         
         return(
-            <div>
+            <div className="submit-button-component-container">
                 {isGenInfo ?
                     <button type="sumbit">Save General Info</button>
                     :

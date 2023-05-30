@@ -10,6 +10,11 @@ export class PracticalExperience extends Component{
         this.presentDate = false;
         this.endPresentDate = this.endPresentDate.bind(this);
     }
+    
+    componentDidMount(){
+        const presentButton = document.querySelector('.practical-experience-container > form > div:nth-child(5) > span > button');
+        presentButton.setAttribute('id', 'present-button-clicked-prac-false');
+    }
 
     endPresentDate(){
         console.log("End Present Date Function For Work Experience..."); // Testing
@@ -17,11 +22,17 @@ export class PracticalExperience extends Component{
         {
             this.presentDate = true;
             console.log("Present Date Work Experience: ", this.presentDate); // Testing
+            const presentButton = document.querySelector('.practical-experience-container > form > div:nth-child(5) > span > button');
+            presentButton.removeAttribute('id');
+            presentButton.setAttribute('id', 'present-button-clicked-prac-true');
         }
         else if(this.presentDate === true)
         {
             this.presentDate = false;
             console.log("Present Date Work Experience: ", this.presentDate); // Testing
+            const presentButton = document.querySelector('.practical-experience-container > form > div:nth-child(5) > span > button');
+            presentButton.removeAttribute('id');
+            presentButton.setAttribute('id', 'present-button-clicked-prac-false');
         }
     }
 
@@ -29,7 +40,7 @@ export class PracticalExperience extends Component{
         const {handleChange, handleInfo, companyName, positionTitle, mainTask, wStartDate, wEndDate} = this.props;
 
         return(
-            <div>
+            <div className="practical-experience-container">
                 <h2>Work Experience</h2>
                 <form onSubmit={(e) => {
                     e.preventDefault();
@@ -132,7 +143,7 @@ export class PracticalExperience extends Component{
 
                     <div>
                         <label htmlFor="wEndDate">End Date</label>
-                        <span><input onChange={handleChange} type="date" name="wEndDate" id="wEndDate" disabled={this.presentDate} value={wEndDate} /> <button type="button" onClick={this.endPresentDate}>Present</button></span>
+                        <input onChange={handleChange} type="date" name="wEndDate" id="wEndDate" disabled={this.presentDate} value={wEndDate} /> <span><button type="button" onClick={this.endPresentDate}>Present</button></span>
                     </div>
                     
                     <div>
