@@ -5,7 +5,7 @@ import { RemoveButton } from "./RemoveButton";
 export class DisplayInformation extends Component{
     constructor(props){
         super(props);
-        this.random = "";
+        this.random = ""; // random property to avoid empty constructor warning.
     }
 
 render(){
@@ -34,17 +34,6 @@ render(){
                     }
                     </>
                 }
-
-                {/* <button onClick={this.saveGeneralInfo}>Save General Info</button> */}
-                {/* {this.genInfoSaved ?
-                    <div>
-                        <p>Name: {this.state.saveName}</p>
-                        <p>Email: {this.state.saveEmail}</p>
-                        <p>Phone Number: {this.state.savePhoneNumber}</p>
-                    </div>
-                    :
-                    <p>No general information has been saved.</p>
-                } */}
             </div>
 
             <div>
@@ -60,7 +49,6 @@ render(){
                                             <p>Main Study: {obj.mainStudy}</p>
                                             <p>Start Date: {obj.startDate}</p>
                                             <p>End Date: {obj.endDate}</p>
-                                            <p>Object Id: {obj.id}</p>
                                             <RemoveButton 
                                                 removeInfo={removeInfo}
                                                 id={obj.id}
@@ -92,7 +80,6 @@ render(){
                                             <p>Position Title: {obj.positionTitle}</p>
                                             <p>Main Task: {obj.mainTask}</p>
                                             <p>Start Date: {obj.wStartDate}</p>
-                                            <p>End Date: {obj.wEndDate}</p>
                                             <RemoveButton
                                                 removeInfo={removeInfo}
                                                 id={obj.id} 

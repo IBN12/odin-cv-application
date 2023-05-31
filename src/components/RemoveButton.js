@@ -11,7 +11,7 @@ export class RemoveButton extends Component{
         const {removeInfo, id, obj} = this.props;
 
         return(
-            <div>
+            <div className="remove-button-component-container">
                 <button onClick={()=>removeInfo(id, obj)}>Remove Info</button>
             </div>
         );

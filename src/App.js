@@ -31,6 +31,8 @@ export default class App extends Component{
         this.isWorkInfoDisplayed = false;
         this.isGenInfoFilled = false;
         this.genInfoHasBeenFilled = false;
+        this.endDateValidity = true;
+        this.wEndDateValidity = true;
         this.numOfEduObjs = 0;
         this.numOfWorkObjs = 0;
 
@@ -57,15 +59,17 @@ export default class App extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.removeInfo = this.removeInfo.bind(this);
         this.saveGeneralInfo = this.saveGeneralInfo.bind(this);
+        this.setEndDateValidity = this.setEndDateValidity.bind(this);
+        this.setWEndDateValidity = this.setWEndDateValidity.bind(this);
 
-        this.displayInfo = () => { 
+        this.displayInfo = () => { // View Display
             this.setState({display: true});
             const displayCVButton = document.querySelector('.app-component-container > div:nth-child(2) > button:nth-child(2)');
             const fillCVButton = document.querySelector('.app-component-container > div:nth-child(2) > button:nth-child(1)');
             fillCVButton.removeAttribute('id');
             displayCVButton.setAttribute('id', 'current-viewport');
         }
-        this.undisplayInfo = () => {
+        this.undisplayInfo = () => { // Fill CV
             this.setState({display: false});
             const displayCVButton = document.querySelector('.app-component-container > div:nth-child(2) > button:nth-child(2)');
             const fillCVButton = document.querySelector('.app-component-container > div:nth-child(2) > button:nth-child(1)');
@@ -102,10 +106,6 @@ export default class App extends Component{
             });
         }
 
-        // this.setState({
-        //     list: this.state.list.concat(props),
-        // });
-
         if (props.isEduInfo)
         {
             this.isEduInfoDisplayed = true;
@@ -116,9 +116,6 @@ export default class App extends Component{
             this.isWorkInfoDisplayed = true;
             this.numOfWorkObjs++;
         }
-
-        console.log("Number Of Educational Objects In The List: ", this.numOfEduObjs); // Testing
-        console.log("Number Of Work Objects In The List: ", this.numOfWorkObjs); // Testing
     }
     
     handleChange(e){
@@ -127,25 +124,38 @@ export default class App extends Component{
             [e.target.id] : e.target.value,
         });
 
-        
-        console.log("Target: ", e.target); // Testing
-        console.log("Length: ", e.target.value.length); // Testing
         if (e.target.value.length > 0 && (e.target.name === "name" || e.target.name === "email" || e.target.name === "phoneNumber"))
         {
             this.isGenInfoFilled = true;
             this.genInfoHasBeenFilled = false;
-            console.log("Is Gen Info Displayed: ", this.isGenInfoFilled); // Testing
         }
         else if (e.target.value.length === 0 && (e.target.name === "name" || e.target.name === "email" || e.target.name === "phoneNumber"))
         {
             this.isGenInfoFilled = false;
-            
-            console.log("Is Gen Info Displayed: ", this.isGenInfoFilled); // Testing
+        }
+
+        // Educational Experience End Date Validity Boolean.
+        if (e.target.value.length > 0 && e.target.name === "endDate")
+        {
+            this.endDateValidity = false;   
+        }
+        else if (e.target.value.length === 0 && e.target.name === "endDate")
+        {
+            this.endDateValidity = true;
+        }
+
+        // Practical Experience End Date Validity Boolean. 
+        if (e.target.value.length > 0 && e.target.name === "wEndDate")
+        {
+            this.wEndDateValidity = false;
+        }
+        else if (e.target.value.length === 0 && e.target.name === "wEndDate")
+        {
+            this.wEndDateValidity = true;
         }
     }
 
     removeInfo(id, obj){
-        console.log("Removing the Info: ", id); // Testing
 
         if(obj.isEduInfo)
         {
@@ -171,20 +181,9 @@ export default class App extends Component{
                 obj.id !== id
             )),
         });
-
-        console.log("Number of Educational Objects In The List: ", this.numOfEduObjs); // Testing
     }
 
     saveGeneralInfo(props){
-        console.log("Saving the general info..."); // Testing
-        console.log("Original Name: ", props.name); // Testing
-        console.log("Original Email: ", props.email); // Testing
-        console.log("Original Phone Number: ", props.phoneNumber); // Testing
-        console.log("\n"); // Testing
-        console.log("State Name: ", this.state.name); // Testing
-        console.log("State Email: ", this.state.email); // Testing
-        console.log("State Phone Number: ", this.state.phoneNumber); // Testing
-
         this.genInfoHasBeenFilled = true;
         this.isGenInfoFilled = false;
 
@@ -197,6 +196,17 @@ export default class App extends Component{
             phoneNumber: "",
         });
     }
+
+    // Setting the Educational Experience End Date back to true
+    setEndDateValidity(){
+        this.endDateValidity = true;
+    }
+
+    // Setting the Practical Experience End Date back to true
+    setWEndDateValidity(){
+        this.wEndDateValidity = true;
+    }
+
 
     render(){
         return(
@@ -228,7 +238,6 @@ export default class App extends Component{
                     :
                     <>
                         <GeneralInformation
-                            handleInfo={this.handleInfo}
                             handleChange={this.handleChange}
                             saveGeneralInfo={this.saveGeneralInfo}
                             name={this.state.name}
@@ -240,50 +249,27 @@ export default class App extends Component{
                         <EducationalExperience
                             handleChange={this.handleChange}
                             handleInfo={this.handleInfo}
+                            setEndDateValidity={this.setEndDateValidity}
                             schoolName={this.state.schoolName}
                             mainStudy={this.state.mainStudy}
                             startDate={this.state.startDate}
                             endDate={this.state.endDate}
-                            isEduInfoDisplayed={this.IsEduInfoDisplayed}
+                            endDateValidity={this.endDateValidity}
                         />
 
                         <PracticalExperience 
                             handleChange={this.handleChange}
                             handleInfo={this.handleInfo}
+                            setWEndDateValidity={this.setWEndDateValidity}
                             companyName={this.state.companyName}
                             positionTitle={this.state.positionTitle}
                             mainTask={this.state.mainTask}
                             wStartDate={this.state.wStartDate}
                             wEndDate={this.state.wEndDate}
+                            wEndDateValidity={this.wEndDateValidity}
                         />
                     </>
                 }
-
-
-
-                {/* <GeneralInformation
-                    handleInfo={this.handleInfo}
-                    handleChange={this.handleChange}
-                    name={this.state.name}
-                    email={this.state.email}
-                    phoneNumber={this.state.phoneNumber}
-                /> */}
-
-                {/* <EducationalExperience
-                    handleChange={this.handleChange}
-                    handleInfo={this.handleInfo}
-                    schoolName={this.state.schoolName}
-                    mainStudy={this.state.mainStudy}
-                    startDate={this.state.startDate}
-                    endDate={this.state.endDate}
-                /> */}
-
-                {/* // <DisplayInformation
-                //     list={this.state.list}
-                //     name={this.state.name}
-                //     email={this.state.email}
-                //     phoneNumber={this.state.phoneNumber}
-                // /> */}
             </div>
         );
     }

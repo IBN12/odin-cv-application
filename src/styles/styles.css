@@ -26,13 +26,11 @@ body{
     grid-template-rows: auto;
     gap: 8px;
 
-    border: 1px solid red;
     padding: 10px;
     font-family: rockinline ,system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: white;
 }
 .app-component-container > div{
-    border: 1px solid green;
     text-align: center;
     padding: 10px;
 }
@@ -169,6 +167,7 @@ body{
 }
 #present-button-clicked-edu-true:focus{
     outline: none;
+    border: 1px solid white;
 }
 
 /* Educational Present Button Clicked - false*/
@@ -184,6 +183,7 @@ body{
 }
 #present-button-clicked-edu-false:focus{
     outline: none;
+    border: 1px solid white;
 }
 
 /********************************************************************************************************************************************************************************/
@@ -250,6 +250,7 @@ body{
 }
 #present-button-clicked-prac-true:focus{
     outline: none;
+    border: 1px solid white;
 }
 
 /* Practical Present Button clicked - false */
@@ -265,17 +266,19 @@ body{
 }
 #present-button-clicked-prac-false:focus{
     outline: none;
+    border: 1px solid white;
 }
 
 /********************************************************************************************************************************************************************************/
 /********************************************************************************************************************************************************************************/
 /* |Display Information Component Container| */
 /* display-information-container - The display information component container. */
-.display-information-container{
-   
+.display-information-container > div > h2{
+    font-size: 30px;
+    letter-spacing: 3px;
 }
-.display-information-container > div >div{
-    border: 2px solid orange;
+.display-information-container > div{
+    font-size: 18px;
 }
 
 /********************************************************************************************************************************************************************************/
@@ -299,7 +302,31 @@ body{
 .submit-button-component-container > button:focus{
     outline: none;
     background-color: #164e63;
+    border: 1px solid white;
+}
+
+/********************************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************************/
+/* |Remove Button Component Container| */
+/* remove-button-component-container > button - The remove button component container. */
+.remove-button-component-container > button{
+    padding: 5px 15px 5px 15px;
+    font-size: 16px;
+    border: 1px solid #164e6352;
+    border-radius: 10px;
+    background-color: #164e6352;
+    color: white;
+    font-family: rockinline, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.remove-button-component-container > button:hover{
+    background-color: #164e63;
     border: 1px solid #164e63;
+    cursor: pointer;
+}
+.remove-button-component-container > button:focus{
+    outline: none;
+    background-color: #164e63;
+    border: 1px solid white;
 }
 
 /********************************************************************************************************************************************************************************/
@@ -307,7 +334,7 @@ body{
 /* |Media Section| */
 /* Page will respond to desktop miniaturization, tablet viewports, and mobile viewports. */
 
-/* Media-0 - For desktop miniaturization. */
+/* Media-0 - For desktop miniaturization, mobile viewports, and tablet viewports. */
 @media screen and (max-width: 1000px){
     /* app-component-container - The app component container. */
     .app-component-container{
@@ -316,9 +343,6 @@ body{
     }
 
     /* general-information-container - The general information container. */
-    .general-information-container > h2{ /* Testing */
-        color: red;
-    }
     .general-information-container > form > div > label{
         display: block;
     }
@@ -333,9 +357,6 @@ body{
     }
     
     /* educational-experience-container - The educational experience container. */
-    .educational-experience-container > h2{ /* Testing */
-        color: red;
-    }
     .educational-experience-container > form > div > label{
         display: block;
     }
@@ -347,9 +368,6 @@ body{
     }
 
     /* practical-experience-container - The practical experience container. */
-    .practical-experience-container > h2{ /* Testing */
-        color: red;
-    }
     .practical-experience-container > form > div > label{
         display: block;
     }
@@ -362,9 +380,4 @@ body{
     #mainTask{ /* Main Task Input */
         width: 100%;
     }
-}
-
-/* Media-1 - For mobile viewports. */
-@media screen and (max-width: 600px){
-
 }

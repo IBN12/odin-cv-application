@@ -16,21 +16,22 @@ export class EducationalExperience extends Component{
         presentButton.setAttribute('id', 'present-button-clicked-edu-false');
     }
 
+    // Toggle between entering an initial end date or pressing the present button.
     endDatePresent(){
-        console.log("End Date Present Function For Educational Experience..."); // Testing
         if(this.presentDate === false)
         {
             this.presentDate = true; 
-            console.log("Present Date Educational Experience: ", this.presentDate); // Testing
+            this.endDateRequired = false;
+
             const presentButton = document.querySelector('.educational-experience-container > form > div:nth-child(4) > span > button');
-            console.log("The Present Button: ", presentButton); // Testing
             presentButton.removeAttribute('id');
             presentButton.setAttribute('id', 'present-button-clicked-edu-true');
         }
         else if(this.presentDate === true)
         {
             this.presentDate = false;
-            console.log("Present Date Education Experience: ", this.presentDate); // Testing
+            this.endDateRequired = true;
+ 
             const presentButton = document.querySelector('.educational-experience-container > form > div:nth-child(4) > span > button');
             presentButton.removeAttribute('id'); 
             presentButton.setAttribute('id', 'present-button-clicked-edu-false');
@@ -38,46 +39,23 @@ export class EducationalExperience extends Component{
     }
 
     render(){
-        const {schoolName, mainStudy, startDate, endDate, handleChange, handleInfo} = this.props;
+        const {schoolName, mainStudy, startDate, endDate, endDateValidity, handleChange, handleInfo, setEndDateValidity} = this.props;
 
         return(
             <div className="educational-experience-container"> 
             <h2>Educational Experience</h2>
             <form onSubmit={(e) => {
                 e.preventDefault();
-                console.log("School Name: ", schoolName); // Testing
-                console.log("Main Study: ", mainStudy); // Testing
-                console.log("\n"); // Testing
-
-                console.log("Start Date: ", startDate); // Testing
+                
                 const startDateParsed = parse(startDate, 'yyyy-MM-dd', new Date());
-                console.log('Start Date Parsed: ', startDateParsed); // Testing
-                console.log('Year: ', startDateParsed.getFullYear()); // Testing
-                console.log('Month: ', startDateParsed.getMonth() + 1); // Testing
-                console.log('Date: ', startDateParsed.getDate()); // Testing
-                console.log("\n"); // Testing
-
-                console.log("End Date: ", endDate); // Testing
                 const endDateParsed = parse(endDate, 'yyyy-MM-dd', new Date());
-                console.log('End Date Parsed: ', endDateParsed); // Testing
-                console.log('Year: ', endDateParsed.getFullYear()); // Testing
-                console.log('Month: ', endDateParsed.getMonth() + 1); // Testing
-                console.log('Date: ', endDateParsed.getDate()); // Testing
-                console.log("\n"); // Testing
-
+                
                 const dateComparisonResult = compareAsc(
                     new Date(startDateParsed.getFullYear(), startDateParsed.getMonth() + 1, startDateParsed.getDate()),
                     new Date(endDateParsed.getFullYear(), endDateParsed.getMonth() + 1, endDateParsed.getDate())
-                )
-                console.log("Date Comparison Result: ", dateComparisonResult); // Testing
-                console.log("\n"); // Testing
+                );
 
                 const numericalPresentDate = new Date();
-                console.log('Numerical Present Date: ', numericalPresentDate); // Testing
-                console.log('Year: ', numericalPresentDate.getFullYear()); // Testing
-                console.log('Month: ', numericalPresentDate.getMonth() + 1); // Testing
-                console.log('Date: ', numericalPresentDate.getDate()); // Testing
-                console.log("\n"); // Testing 
                 
                 if (this.presentDate)
                 {
@@ -86,11 +64,9 @@ export class EducationalExperience extends Component{
                         new Date(startDateParsed.getFullYear(), startDateParsed.getMonth() + 1, startDateParsed.getDate()),
                         new Date(numericalPresentDate.getFullYear(), numericalPresentDate.getMonth() + 1, numericalPresentDate.getDate())
                     );
-                    console.log("Present Date Comparison Result: ", presentDateComparisonResult); // Testing
 
                     if (presentDateComparisonResult === 1)
                     {
-                        console.log("Invalid Date Input: The start date comes after the present date."); // Testing
                         alert("Invalid Date Input: The start date should come before the present date.");
                         return;
                     }
@@ -98,28 +74,41 @@ export class EducationalExperience extends Component{
                     {
                         handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: "Present", isEduInfo: true, id: uniqid()});
                         this.presentDate = false;
+                        const presentButton = document.querySelector('.educational-experience-container > form > div:nth-child(4) > span > button');
+                        presentButton.removeAttribute('id');
+                        presentButton.setAttribute('id', 'present-button-clicked-edu-false');
                     }
                     else if (presentDateComparisonResult === 0)
                     {
                         handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: "Present", isEduInfo: true, id: uniqid()});
                         this.presentDate = false;
+                        const presentButton = document.querySelector('.educational-experience-container > form > div:nth-child(4) > span > button');
+                        presentButton.removeAttribute('id');
+                        presentButton.setAttribute('id', 'present-button-clicked-edu-false');
                     }
                 }
                 else
                 {
-                    if (dateComparisonResult === 1)
+                    if (endDateValidity)
+                    {   
+                        alert("End date must be entered or present button must be clicked.");
+                        return;
+                    }
+                    else if (dateComparisonResult === 1)
                     {
-                        console.log("Invalid Date Input: The start date comes after the end date."); // Testing
                         alert("Invalid Date Input: The start date should come before the end date.");
+                        setEndDateValidity();
                         return;
                     }
                     else if (dateComparisonResult === -1)
                     {
                         handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: endDate, isEduInfo: true, id: uniqid()});
+                        setEndDateValidity();
                     }
                     else if (dateComparisonResult === 0)
                     {
                         handleInfo({schoolName: schoolName, mainStudy: mainStudy, startDate: startDate, endDate: endDate, isEduInfo: true, id: uniqid()});
+                        setEndDateValidity();
                     }
                 }
                 
@@ -127,17 +116,17 @@ export class EducationalExperience extends Component{
 
                 <div>
                     <label htmlFor="schoolName">School Name</label>
-                    <input onChange={handleChange} type="text" id="schoolName" name="schoolName" value={schoolName} />
+                    <input onChange={handleChange} type="text" id="schoolName" name="schoolName" required maxLength={50} value={schoolName} />
                 </div>
 
                 <div>
                     <label htmlFor="mainStudy">Main Study</label>
-                    <input onChange={handleChange} type="text" id="mainStudy" name="mainStudy" value={mainStudy} />
+                    <input onChange={handleChange} type="text" id="mainStudy" name="mainStudy" required maxLength={50} value={mainStudy} />
                 </div>
 
                 <div>
                     <label htmlFor="startDate">Start Date</label>
-                    <input onChange={handleChange} type="date" id="startDate" name="startDate" value={startDate} />
+                    <input onChange={handleChange} type="date" id="startDate" name="startDate" required value={startDate} />
                 </div>
 
                 <div>
