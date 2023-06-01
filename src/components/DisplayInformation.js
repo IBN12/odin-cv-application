@@ -1,37 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import { RemoveButton } from "./RemoveButton";
 
-// DisplayInformation(): The display information class component.  
-export class DisplayInformation extends Component{
-    constructor(props){
-        super(props);
-        this.random = ""; // random property to avoid empty constructor warning.
-    }
-
-render(){
-    const {list, name, email, phoneNumber, saveName, saveEmail, savePhoneNumber, removeInfo, isGenInfoFilled, isEduInfoDisplayed, isWorkInfoDisplayed, genInfoHasBeenFilled} = this.props;
-
-    return (
+// DisplayInformation(): Will display all the information that the user enters into the input fields. 
+export function DisplayInformation(props){
+    const {list, name, email, phoneNumber, saveName, saveEmail, savePhoneNumber, removeInfo, isGenInfoFilled, isEduInfoDisplayed, isWorkInfoDisplayed, genInfoHasBeenFilled} = props; // Destructuring Props
+    return(
         <div className="display-information-container">
             <div>
                 <h2>General Information Display</h2>
-                {isGenInfoFilled ? 
+                {isGenInfoFilled ?
                     <>
                         <p>Name: {name}</p>
                         <p>Email: {email}</p>
-                        <p>Phone Number: {phoneNumber}</p>
+                        <p>PhoneNumber: {phoneNumber}</p>
                     </>
                     :
                     <>
-                    {genInfoHasBeenFilled ?
-                        <>
-                            <p>Name: {saveName}</p>
-                            <p>Email: {saveEmail}</p>
-                            <p>Phone Number: {savePhoneNumber}</p>
-                        </>
-                        :
-                        <p>No general information has been filled.</p>
-                    }
+                        {genInfoHasBeenFilled ?
+                            <>
+                                <p>Name: {saveName}</p>
+                                <p>Email: {saveEmail}</p>
+                                <p>Phone Number: {savePhoneNumber}</p>
+                            </>
+                            :
+                            <p>No general information has been filled.</p>
+                        }
                     </>
                 }
             </div>
@@ -41,7 +34,7 @@ render(){
                 {isEduInfoDisplayed ?
                     <>
                         {list.map((obj) => {
-                            return (
+                            return(
                                 <div key={obj.id}>
                                     {obj.isEduInfo ?
                                         <>
@@ -58,8 +51,10 @@ render(){
                                         :
                                         null
                                     }
+
                                 </div>
                             );
+
                         })}
                     </>
                     :
@@ -72,7 +67,7 @@ render(){
                 {isWorkInfoDisplayed ?
                     <>
                         {list.map((obj) => {
-                            return (
+                            return(
                                 <div key={obj.id}>
                                     {obj.isWorkInfo ?
                                         <>
@@ -80,25 +75,24 @@ render(){
                                             <p>Position Title: {obj.positionTitle}</p>
                                             <p>Main Task: {obj.mainTask}</p>
                                             <p>Start Date: {obj.wStartDate}</p>
-                                            <RemoveButton
+                                            <p>End Date: {obj.wEndDate}</p>
+                                            <RemoveButton 
                                                 removeInfo={removeInfo}
-                                                id={obj.id} 
+                                                id={obj.id}
                                                 obj={obj}
                                             />
                                         </>
                                         :
                                         null
-                                    } 
+                                    }
                                 </div>
-                            );
-                        })}  
+                            )
+                        })}
                     </>
                     :
                     <p>No work info has been filled.</p>
                 }
             </div>
-
         </div>
     );
-}
 }
